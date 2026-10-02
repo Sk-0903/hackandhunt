@@ -88,34 +88,6 @@ export default function Contact() {
             </motion.div>
           ))}
         </div>
-
-        {/* Contact links */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.55 }}
-          className="flex flex-wrap gap-6 mt-6 pt-6"
-          style={{ borderTop: '1px solid var(--line)' }}
-        >
-          <a
-            href={`mailto:${EVENT_CONFIG.socialLinks.email}`}
-            className="label-mono hover:text-text transition-colors"
-            style={{ color: 'var(--text-muted)' }}
-            data-hover="true"
-          >
-            ↗ {EVENT_CONFIG.socialLinks.email}
-          </a>
-          <a
-            href={EVENT_CONFIG.socialLinks.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="label-mono hover:text-text transition-colors"
-            style={{ color: 'var(--text-muted)' }}
-            data-hover="true"
-          >
-            ↗ INSTAGRAM
-          </a>
-        </motion.div>
       </div>
     </section>
   );

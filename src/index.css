@@ -192,26 +192,6 @@ body {
 }
 .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
 
-/* ── Mobile sticky register bar ─────────────────── */
-.mobile-register-bar {
-  display: none;
-}
-@media (max-width: 767px) {
-  .mobile-register-bar {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 45;
-    padding: 12px 20px;
-    padding-bottom: calc(12px + env(safe-area-inset-bottom));
-    background: rgba(5,8,6,0.96);
-    border-top: 1px solid var(--line-strong);
-    backdrop-filter: blur(12px);
-  }
-}
-
 /* ── Tabular nums for countdown ──────────────────── */
 .tabular { font-variant-numeric: tabular-nums; }
 

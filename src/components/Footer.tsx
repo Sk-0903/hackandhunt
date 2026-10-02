@@ -26,7 +26,7 @@ export default function Footer() {
       </div>
 
       <div className="container-site relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-12 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 items-start">
 
           {/* Brand block */}
           <div>
@@ -79,35 +79,6 @@ export default function Footer() {
               ))}
             </ul>
           </nav>
-
-          {/* Connect */}
-          <div>
-            <p className="label-mono mb-4 opacity-40">CONNECT</p>
-            <ul className="space-y-3 list-none">
-              <li>
-                <a
-                  href={EVENT_CONFIG.socialLinks.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="label-mono hover:text-text transition-colors"
-                  style={{ color: 'var(--text-muted)' }}
-                  data-hover="true"
-                >
-                  INSTAGRAM
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${EVENT_CONFIG.socialLinks.email}`}
-                  className="label-mono hover:text-text transition-colors"
-                  style={{ color: 'var(--text-muted)' }}
-                  data-hover="true"
-                >
-                  EMAIL
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
 
         {/* Bottom bar */}

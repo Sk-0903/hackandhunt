@@ -211,11 +211,6 @@ export default function Navbar({ scrolled = false }: NavbarProps) {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Mobile sticky bottom register bar */}
-      <div className="mobile-register-bar">
-        <RegisterButton label="REGISTER NOW" className="flex-1 justify-center" />
-      </div>
     </>
   );
 }
