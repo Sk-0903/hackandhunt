@@ -33,11 +33,14 @@ export const EVENT_CONFIG = {
   // ── Coordinators ───────────────────────────────────────────────────────────
   coordinators: {
     students: [
-      { name: 'Student Coordinator Name', phone: '+91 00000 00000' },
-      { name: 'Student Coordinator Name', phone: '+91 00000 00000' },
+      { name: '', phone: '' },
+      { name: '', phone: '' },
+      { name: '', phone: '' },
+      { name: '', phone: '' },
     ],
     faculty: [
-      { name: 'Faculty Coordinator Name', dept: 'Department Name' },
+      { name: '', dept: '' },
+      { name: '', dept: '' },
     ],
   },
 

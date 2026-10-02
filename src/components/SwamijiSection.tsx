@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import SectionLabel from './ui/SectionLabel';
 import { RevealLine } from './ui/Reveal';
@@ -55,21 +55,25 @@ const SWAMIJIS: Swamiji[] = [
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+const AUTO_PLAY_INTERVAL = 3000; // 3 seconds per Swamiji
 
 export default function SwamijiSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-60px' });
   const [activeIndex, setActiveIndex] = useState(0);
-  const [viewMode, setViewMode] = useState<'spotlight' | 'trinity'>('spotlight');
 
   const activeSwamiji = SWAMIJIS[activeIndex];
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? SWAMIJIS.length - 1 : prev - 1));
-  };
+  // Non-stop automatic sliding
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % SWAMIJIS.length);
+    }, AUTO_PLAY_INTERVAL);
+    return () => clearInterval(interval);
+  }, []);
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev === SWAMIJIS.length - 1 ? 0 : prev + 1));
+  const handleSelect = (idx: number) => {
+    setActiveIndex(idx);
   };
 
   return (
@@ -165,105 +169,103 @@ export default function SwamijiSection() {
             </div>
           </div>
 
-          {/* Interactive Mode Toggle: Spotlight vs Trinity */}
+          {/* Automatic Slideshow Live Badge */}
           <div className="flex items-center gap-2 self-start md:self-end">
-            <span className="label-mono text-[9px] text-white/40 tracking-wider mr-1 hidden sm:inline">
-              VIEW MODE:
-            </span>
-            <div className="inline-flex p-1 rounded-[2px] bg-black/50 border border-white/10 backdrop-blur-md">
-              <button
-                onClick={() => setViewMode('spotlight')}
-                className={`px-3 sm:px-4 py-1.5 text-[10px] font-mono tracking-wider transition-all duration-200 rounded-[2px] ${
-                  viewMode === 'spotlight'
-                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 font-semibold shadow-[0_0_12px_rgba(245,158,11,0.2)]'
-                    : 'text-white/50 hover:text-white'
-                }`}
-              >
-                ★ SPOTLIGHT
-              </button>
-              <button
-                onClick={() => setViewMode('trinity')}
-                className={`px-3 sm:px-4 py-1.5 text-[10px] font-mono tracking-wider transition-all duration-200 rounded-[2px] ${
-                  viewMode === 'trinity'
-                    ? 'bg-primary/20 text-primary border border-primary/40 font-semibold shadow-[0_0_12px_rgba(0,230,118,0.2)]'
-                    : 'text-white/50 hover:text-white'
-                }`}
-              >
-                ❖ TRINITY VIEW
-              </button>
+            <div className="inline-flex items-center gap-2.5 px-3 sm:px-4 py-1.5 rounded-[2px] bg-black/60 border border-amber-500/30 backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="label-mono text-[9.5px] sm:text-[10px] tracking-widest text-amber-300 font-semibold uppercase">
+                AUTO-SLIDING SHOWCASE
+              </span>
+              <span className="text-white/20">|</span>
+              <span className="label-mono text-[9px] sm:text-[9.5px] text-white/50">
+                0{activeIndex + 1} / 0{SWAMIJIS.length}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* ── MODE 1: INTERACTIVE SACRED SPOTLIGHT (Default & Mobile Favorite) ── */}
-        {viewMode === 'spotlight' && (
-          <div className="relative">
-            {/* Quick Swamiji Selectors (Mobile & Desktop) */}
-            <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mb-6 sm:mb-8">
-              {SWAMIJIS.map((s, idx) => {
-                const isSelected = idx === activeIndex;
-                return (
-                  <button
-                    key={s.id}
-                    onClick={() => setActiveIndex(idx)}
-                    className={`group relative text-center sm:text-left p-2 sm:p-4 rounded-[2px] border transition-all duration-300 flex flex-col sm:flex-row items-center gap-2 sm:gap-3.5 ${
-                      isSelected
-                        ? 'bg-gradient-to-b sm:bg-gradient-to-r from-amber-950/40 to-black/70 border-amber-500/60 shadow-[0_0_20px_rgba(245,158,11,0.15)]'
-                        : 'bg-black/40 border-white/[0.08] hover:border-white/20 hover:bg-black/60'
-                    }`}
-                  >
-                    {/* Small avatar thumbnail */}
-                    <div
-                      className={`relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0 border transition-all ${
-                        isSelected
-                          ? 'border-amber-400 ring-2 ring-amber-400/40 shadow-[0_0_12px_rgba(245,158,11,0.4)] scale-105 sm:scale-100'
-                          : 'border-white/20 opacity-70 group-hover:opacity-100'
-                      }`}
-                    >
-                      <img
-                        src={s.image}
-                        alt={s.shortName}
-                        className="w-full h-full object-cover object-top"
+        {/* ── AUTOMATIC SACRED SLIDESHOW SHOWCASE ── */}
+        <div className="relative">
+          {/* Quick Swamiji Stage Indicators with Auto Progress Bar */}
+          <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mb-6 sm:mb-8">
+            {SWAMIJIS.map((s, idx) => {
+              const isSelected = idx === activeIndex;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => handleSelect(idx)}
+                  className={`group relative text-center sm:text-left p-2 sm:p-4 rounded-[2px] border transition-all duration-300 flex flex-col sm:flex-row items-center gap-2 sm:gap-3.5 overflow-hidden ${
+                    isSelected
+                      ? 'bg-gradient-to-b sm:bg-gradient-to-r from-amber-950/40 to-black/70 border-amber-500/60 shadow-[0_0_20px_rgba(245,158,11,0.15)]'
+                      : 'bg-black/40 border-white/[0.08] hover:border-white/20 hover:bg-black/60'
+                  }`}
+                >
+                  {/* Per-card auto progress bar indicator */}
+                  {isSelected && (
+                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-white/10 overflow-hidden">
+                      <motion.div
+                        key={activeIndex}
+                        initial={{ width: '0%' }}
+                        animate={{ width: '100%' }}
+                        transition={{ duration: AUTO_PLAY_INTERVAL / 1000, ease: 'linear' }}
+                        className="h-full bg-gradient-to-r from-amber-400 to-emerald-400 shadow-[0_0_8px_rgba(245,158,11,0.8)]"
                       />
                     </div>
+                  )}
 
-                    <div className="min-w-0 flex-1 w-full">
-                      <span
-                        className={`label-mono text-[7px] xs:text-[8px] sm:text-[8.5px] block font-semibold tracking-wider uppercase transition-colors truncate ${
-                          isSelected ? 'text-amber-400' : 'text-white/40'
-                        }`}
-                      >
-                        {s.role}
-                      </span>
-                      <h3
-                        className={`font-grotesk font-semibold text-[10.5px] xs:text-xs sm:text-sm truncate transition-colors ${
-                          isSelected ? 'text-white' : 'text-white/70 group-hover:text-white'
-                        }`}
-                      >
-                        {s.shortName}
-                      </h3>
-                    </div>
+                  {/* Small avatar thumbnail */}
+                  <div
+                    className={`relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0 border transition-all ${
+                      isSelected
+                        ? 'border-amber-400 ring-2 ring-amber-400/40 shadow-[0_0_12px_rgba(245,158,11,0.4)] scale-105 sm:scale-100'
+                        : 'border-white/20 opacity-70 group-hover:opacity-100'
+                    }`}
+                  >
+                    <img
+                      src={s.image}
+                      alt={s.shortName}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
 
-                    {/* Active indicator dot */}
-                    {isSelected && (
-                      <span className="hidden sm:block w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0 animate-ping" />
-                    )}
-                    {isSelected && (
-                      <span className="sm:hidden absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-amber-400" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+                  <div className="min-w-0 flex-1 w-full">
+                    <span
+                      className={`label-mono text-[7px] xs:text-[8px] sm:text-[8.5px] block font-semibold tracking-wider uppercase transition-colors truncate ${
+                        isSelected ? 'text-amber-400' : 'text-white/40'
+                      }`}
+                    >
+                      {s.role}
+                    </span>
+                    <h3
+                      className={`font-grotesk font-semibold text-[10.5px] xs:text-xs sm:text-sm truncate transition-colors ${
+                        isSelected ? 'text-white' : 'text-white/70 group-hover:text-white'
+                      }`}
+                    >
+                      {s.shortName}
+                    </h3>
+                  </div>
 
-            {/* Majestic Spotlight Showcase Card */}
+                  {/* Active indicator dot */}
+                  {isSelected && (
+                    <span className="hidden sm:block w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0 animate-ping" />
+                  )}
+                  {isSelected && (
+                    <span className="sm:hidden absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-amber-400" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Majestic Sliding Showcase Card */}
+          <div className="overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeSwamiji.id}
-                initial={{ opacity: 0, y: 16, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -16, scale: 0.98 }}
-                transition={{ duration: 0.45, ease: EASE }}
+                initial={{ opacity: 0, x: 70 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -70 }}
+                transition={{ duration: 0.55, ease: EASE }}
                 className="relative rounded-[2px] p-4 sm:p-8 md:p-10 overflow-hidden border border-amber-500/30 backdrop-blur-md"
                 style={{
                   background:
@@ -326,34 +328,12 @@ export default function SwamijiSection() {
                       </div>
                     </div>
 
-                    {/* Navigation Arrows for Mobile & Laptop */}
-                    <div className="flex items-center gap-4 mt-5">
-                      <button
-                        onClick={handlePrev}
-                        className="p-2 rounded-[2px] border border-white/10 hover:border-amber-400/50 bg-black/40 text-white/70 hover:text-amber-300 transition-colors label-mono text-xs flex items-center gap-1.5"
-                        aria-label="Previous Swamiji"
-                      >
-                        ← PREV
-                      </button>
-                      <div className="flex items-center gap-1.5">
-                        {SWAMIJIS.map((_, i) => (
-                          <button
-                            key={i}
-                            onClick={() => setActiveIndex(i)}
-                            className={`h-1.5 transition-all duration-300 rounded-full ${
-                              i === activeIndex ? 'w-6 bg-amber-400' : 'w-1.5 bg-white/20 hover:bg-white/40'
-                            }`}
-                            aria-label={`Jump to Swamiji ${i + 1}`}
-                          />
-                        ))}
-                      </div>
-                      <button
-                        onClick={handleNext}
-                        className="p-2 rounded-[2px] border border-white/10 hover:border-amber-400/50 bg-black/40 text-white/70 hover:text-amber-300 transition-colors label-mono text-xs flex items-center gap-1.5"
-                        aria-label="Next Swamiji"
-                      >
-                        NEXT →
-                      </button>
+                    {/* Automatic Slide Indicator under portrait */}
+                    <div className="flex items-center gap-2 mt-4 px-3 py-1 rounded-[2px] bg-black/50 border border-white/10">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
+                      <span className="label-mono text-[9px] text-amber-300 tracking-wider">
+                        SACRED STAGE 0{activeIndex + 1} OF 0{SWAMIJIS.length}
+                      </span>
                     </div>
                   </div>
 
@@ -410,91 +390,7 @@ export default function SwamijiSection() {
               </motion.div>
             </AnimatePresence>
           </div>
-        )}
-
-        {/* ── MODE 2: GRAND TRINITY SANCTUM (All 3 Gurus in Ornate Pillars) ── */}
-        {viewMode === 'trinity' && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-            {SWAMIJIS.map((s, idx) => (
-              <motion.article
-                key={s.id}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: idx * 0.12, ease: EASE }}
-                className="group relative flex flex-col items-center text-center p-6 sm:p-7 transition-all duration-300 rounded-[2px] border border-amber-500/25 hover:border-amber-400/60"
-                style={{
-                  background:
-                    'radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.06) 0%, rgba(5, 8, 6, 0.85) 75%)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
-                }}
-              >
-                {/* Corner accent bracket lines */}
-                <div
-                  className="absolute -top-[1px] -left-[1px] w-3 h-3 border-t-2 border-l-2 border-amber-400/60 group-hover:border-amber-400 transition-colors"
-                  aria-hidden="true"
-                />
-                <div
-                  className="absolute -bottom-[1px] -right-[1px] w-3 h-3 border-b-2 border-r-2 border-amber-400/60 group-hover:border-amber-400 transition-colors"
-                  aria-hidden="true"
-                />
-
-                {/* Dignified Vertical Portrait Frame with Celestial Halo */}
-                <div className="relative mb-6 w-full max-w-[260px] aspect-[4/5] rounded-[2px] overflow-hidden border border-amber-400/30 transition-transform duration-300 group-hover:scale-[1.02] bg-[#070B08]">
-                  <div
-                    className="absolute inset-0 opacity-25 group-hover:opacity-50 transition-opacity pointer-events-none"
-                    style={{
-                      background: 'radial-gradient(circle at 50% 30%, rgba(245, 158, 11, 0.5) 0%, transparent 75%)',
-                    }}
-                    aria-hidden="true"
-                  />
-
-                  <img
-                    src={s.image}
-                    alt={s.name}
-                    className="w-full h-full object-cover object-top select-none"
-                    loading="lazy"
-                  />
-
-                  {/* Gradient shadow on portrait bottom */}
-                  <div
-                    className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
-                    style={{
-                      background: 'linear-gradient(to top, rgba(5, 8, 6, 0.9) 0%, transparent 100%)',
-                    }}
-                    aria-hidden="true"
-                  />
-                </div>
-
-                {/* Reverent Content */}
-                <div className="flex-1 flex flex-col justify-between w-full space-y-3">
-                  <span
-                    className="label-mono text-[10px] sm:text-[10.5px] font-semibold tracking-widest block text-amber-400"
-                  >
-                    {s.role}
-                  </span>
-
-                  <h3
-                    className="font-grotesk font-semibold text-base sm:text-lg leading-snug px-1 text-white group-hover:text-amber-200 transition-colors"
-                    style={{ letterSpacing: '-0.01em' }}
-                  >
-                    {s.name}
-                  </h3>
-
-                  <p className="font-inter text-xs text-white/70 italic px-2 pt-2 border-t border-white/[0.08]">
-                    "{s.blessing}"
-                  </p>
-
-                  <p
-                    className="label-mono text-[9px] sm:text-[9.5px] leading-relaxed opacity-50 pt-2"
-                    style={{ borderTop: '1px solid var(--line)', color: 'var(--text-muted)' }}
-                  >
-                    {s.institution}
-                  </p>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        )}
+        </div>
 
         {/* Transition into Hack & Hunt: Golden-Green signal line connector */}
         <div className="mt-14 md:mt-20 flex flex-col items-center justify-center">
