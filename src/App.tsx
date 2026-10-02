@@ -81,7 +81,18 @@ export default function App() {
   const [headerScrolled, setHeaderScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setHeaderScrolled(window.scrollY > 30);
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const y = window.scrollY;
+          if (y > 60) setHeaderScrolled(true);
+          else if (y < 20) setHeaderScrolled(false);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);

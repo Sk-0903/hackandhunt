@@ -19,20 +19,11 @@ interface NavbarProps {
   scrolled?: boolean;
 }
 
-export default function Navbar({ scrolled: externalScrolled }: NavbarProps) {
-  const [internalScrolled, setInternalScrolled] = useState(false);
+export default function Navbar({ scrolled = false }: NavbarProps) {
   const [menuOpen, setMenuOpen]   = useState(false);
   const activeSection             = useActiveSection(SECTION_IDS);
   const indicatorRef = useRef<HTMLDivElement>(null);
   const linksRef     = useRef<Map<string, HTMLAnchorElement>>(new Map());
-
-  useEffect(() => {
-    const fn = () => setInternalScrolled(window.scrollY > 30);
-    window.addEventListener('scroll', fn, { passive: true });
-    return () => window.removeEventListener('scroll', fn);
-  }, []);
-
-  const scrolled = externalScrolled ?? internalScrolled;
 
   // Slide the indicator underline to the active link
   useEffect(() => {
@@ -56,19 +47,14 @@ export default function Navbar({ scrolled: externalScrolled }: NavbarProps) {
       <a href="#main" className="skip-link">Skip to main content</a>
 
       <header
-        className="relative w-full transition-all duration-300"
+        className="relative w-full transition-colors duration-200"
         style={{
-          background: scrolled ? 'rgba(5,8,6,0.96)' : 'rgba(5,8,6,0.90)',
+          background: scrolled ? 'rgba(5,8,6,0.98)' : 'rgba(5,8,6,0.92)',
           backdropFilter: 'blur(16px)',
           borderBottom: '1px solid var(--line)',
         }}
       >
-        <div
-          className="container-site flex items-center justify-between transition-all duration-300"
-          style={{
-            height: scrolled ? '3.5rem' : '4rem',
-          }}
-        >
+        <div className="container-site flex items-center justify-between h-14">
 
           {/* Logo */}
           <a
