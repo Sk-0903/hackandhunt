@@ -16,27 +16,27 @@ export default function InstitutionalHeader({ scrolled = false }: InstitutionalH
       {/* Very faint background grid for seamless cohesion with the site */}
       <div className="absolute inset-0 coord-grid opacity-10 pointer-events-none" aria-hidden="true" />
 
-      <div className="container-site relative z-10 py-2 sm:py-2.5">
-        <div className="flex items-center justify-between gap-3 md:gap-6">
+      <div className="container-site relative z-10 py-1.5 sm:py-2.5">
+        <div className="flex items-center justify-between gap-2.5 sm:gap-4 md:gap-6">
           
           {/* Logo + Institutional Title Group */}
-          <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
+          <div className="flex items-center gap-2.5 sm:gap-4 md:gap-5 min-w-0">
             {/* Official SJBIT Logo */}
             <div className="flex-shrink-0 flex items-center justify-center">
               <img
                 src="/images/sjbit-logo.png"
                 alt="SJB Institute of Technology Official Emblem"
-                className="h-10 sm:h-12 w-auto object-contain select-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
+                className="h-8 xs:h-9 sm:h-12 w-auto object-contain select-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
                 loading="eager"
               />
             </div>
 
             {/* Institutional Hierarchy Text */}
-            <div className="flex flex-col justify-center text-left">
+            <div className="flex flex-col justify-center text-left min-w-0">
               {/* Sacred Invocation + Trust */}
               <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
                 <span
-                  className="font-medium tracking-[0.16em] select-none font-sans text-[#FFB020] text-[9.5px] sm:text-[11px]"
+                  className="font-medium tracking-[0.14em] sm:tracking-[0.16em] select-none font-sans text-[#FFB020] text-[9px] sm:text-[11px] truncate"
                 >
                   || ಜೈ ಶ್ರೀ ಗುರುದೇವ್ || JAI SRI GURUDEV
                 </span>
@@ -50,14 +50,14 @@ export default function InstitutionalHeader({ scrolled = false }: InstitutionalH
 
               {/* College Main Title */}
               <h1
-                className="font-grotesk font-bold tracking-tight leading-tight text-[#FF7A30] text-sm sm:text-base md:text-xl"
+                className="font-grotesk font-bold tracking-tight leading-tight text-[#FF7A30] text-[13px] xs:text-sm sm:text-base md:text-xl truncate"
               >
                 SJB INSTITUTE OF TECHNOLOGY
               </h1>
 
               {/* Autonomous Affiliation Subtext */}
               <p
-                className="label-mono uppercase tracking-wider text-[#8C9891] opacity-75 text-[8px] sm:text-[9.5px]"
+                className="label-mono uppercase tracking-wider text-[#8C9891] opacity-75 text-[7px] xs:text-[8px] sm:text-[9.5px] leading-tight truncate"
               >
                 AN AUTONOMOUS INSTITUTE UNDER VISVESVARAYA TECHNOLOGICAL UNIVERSITY
               </p>

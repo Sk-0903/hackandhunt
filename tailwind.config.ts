@@ -4,6 +4,9 @@ const config: Config = {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
+      screens: {
+        xs: '380px',
+      },
       colors: {
         bg:           'var(--bg)',
         surface:      'var(--surface)',

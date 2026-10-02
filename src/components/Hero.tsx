@@ -77,26 +77,30 @@ export default function Hero() {
         </motion.div>
 
         {/* Full-Width Centered Monumental Title: HACK & HUNT */}
-        <div className="w-full my-3 sm:my-4">
+        <div className="w-full my-2.5 sm:my-4">
           <h1
             aria-label="Hack and Hunt"
-            className="font-grotesk font-black tracking-tight leading-[0.95] text-center"
+            className="font-grotesk font-black tracking-tight leading-[0.92] sm:leading-[0.95] text-center select-none"
             style={{ letterSpacing: '-0.035em' }}
           >
-            <RevealLine delay={0.1}>
-              <span className="inline-block text-hero text-white mr-2 sm:mr-4">
-                HACK
-              </span>
-              <span
-                className="inline-block text-hero"
-                style={{
-                  color: '#00E676',
-                  textShadow: '0 0 45px rgba(0, 230, 118, 0.45), 0 0 90px rgba(0, 230, 118, 0.2)',
-                }}
-              >
-                &amp; HUNT
-              </span>
-            </RevealLine>
+            <div className="flex flex-col sm:flex-row items-center justify-center sm:gap-3.5 md:gap-5">
+              <RevealLine delay={0.1}>
+                <span className="inline-block text-[3.25rem] xs:text-[4rem] sm:text-hero text-white tracking-tight">
+                  HACK
+                </span>
+              </RevealLine>
+              <RevealLine delay={0.2}>
+                <span
+                  className="inline-block text-[3.25rem] xs:text-[4rem] sm:text-hero tracking-tight"
+                  style={{
+                    color: '#00E676',
+                    textShadow: '0 0 35px rgba(0, 230, 118, 0.45), 0 0 80px rgba(0, 230, 118, 0.2)',
+                  }}
+                >
+                  &amp; HUNT
+                </span>
+              </RevealLine>
+            </div>
           </h1>
         </div>
 
@@ -105,56 +109,56 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.6, ease: EASE }}
-          className="mt-4 sm:mt-5 mb-8 sm:mb-10 max-w-2xl mx-auto space-y-2"
+          className="mt-3 sm:mt-5 mb-6 sm:mb-10 max-w-2xl mx-auto space-y-1.5 sm:space-y-2 px-2"
         >
-          <p className="label-mono font-semibold text-primary/90 text-xs sm:text-sm tracking-[0.25em] uppercase">
+          <p className="label-mono font-semibold text-primary/90 text-xs sm:text-sm tracking-[0.22em] sm:tracking-[0.25em] uppercase">
             OUTTHINK. OUTBUILD. OUTHUNT.
           </p>
-          <p className="font-inter text-sm sm:text-base md:text-lg text-white/70 leading-relaxed max-w-xl mx-auto">
+          <p className="font-inter text-xs xs:text-sm sm:text-base md:text-lg text-white/70 leading-relaxed max-w-xl mx-auto">
             The flagship dual-phase technical challenge of VIGYANTRA 2026. A high-stakes combination
             of rapid code-cracking sprints and real-world campus treasure hunting.
           </p>
         </motion.div>
 
-        {/* Centered Key Metric Cards Strip */}
+        {/* Centered Key Metric Cards Strip (Cockpit HUD) */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.55, duration: 0.6, ease: EASE }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5 w-full max-w-2xl mb-9 sm:mb-11"
+          className="grid grid-cols-3 gap-2 sm:gap-5 w-full max-w-2xl mb-7 sm:mb-11"
         >
           {/* Card 1: Prize Pool */}
-          <div className="p-4 rounded-[2px] bg-black/60 border border-primary/35 relative group hover:border-primary/70 transition-all shadow-[0_4px_20px_rgba(0,230,118,0.08)]">
-            <span className="label-mono text-[9px] text-white/45 block tracking-widest uppercase">
+          <div className="p-2.5 sm:p-4 rounded-[2px] bg-black/60 border border-primary/35 relative group hover:border-primary/70 transition-all shadow-[0_4px_20px_rgba(0,230,118,0.08)] flex flex-col justify-center items-center text-center">
+            <span className="label-mono text-[7.5px] xs:text-[8.5px] sm:text-[9.5px] text-white/50 block tracking-wider sm:tracking-widest uppercase">
               PRIZE POOL
             </span>
-            <span className="font-grotesk font-bold text-xl sm:text-2xl text-primary block mt-1">
+            <span className="font-grotesk font-bold text-base xs:text-lg sm:text-2xl text-primary block mt-0.5 sm:mt-1">
               ₹50,000
             </span>
-            <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-primary/70" aria-hidden="true" />
-            <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-primary/70" aria-hidden="true" />
+            <div className="absolute top-0 right-0 w-2 h-2 sm:w-2.5 sm:h-2.5 border-t-2 border-r-2 border-primary/70" aria-hidden="true" />
+            <div className="absolute bottom-0 left-0 w-2 h-2 sm:w-2.5 sm:h-2.5 border-b-2 border-l-2 border-primary/70" aria-hidden="true" />
           </div>
 
           {/* Card 2: Date */}
-          <div className="p-4 rounded-[2px] bg-black/60 border border-white/15 relative group hover:border-white/30 transition-all">
-            <span className="label-mono text-[9px] text-white/45 block tracking-widest uppercase">
+          <div className="p-2.5 sm:p-4 rounded-[2px] bg-black/60 border border-white/15 relative group hover:border-white/30 transition-all flex flex-col justify-center items-center text-center">
+            <span className="label-mono text-[7.5px] xs:text-[8.5px] sm:text-[9.5px] text-white/50 block tracking-wider sm:tracking-widest uppercase">
               EVENT DATE
             </span>
-            <span className="font-grotesk font-semibold text-base sm:text-lg text-white block mt-1">
+            <span className="font-grotesk font-semibold text-xs xs:text-sm sm:text-lg text-white block mt-0.5 sm:mt-1 whitespace-nowrap">
               30 OCT 2026
             </span>
-            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/30" aria-hidden="true" />
+            <div className="absolute top-0 right-0 w-1.5 h-1.5 sm:w-2 sm:h-2 border-t border-r border-white/30" aria-hidden="true" />
           </div>
 
           {/* Card 3: Team */}
-          <div className="p-4 rounded-[2px] bg-black/60 border border-white/15 relative group hover:border-white/30 transition-all">
-            <span className="label-mono text-[9px] text-white/45 block tracking-widest uppercase">
+          <div className="p-2.5 sm:p-4 rounded-[2px] bg-black/60 border border-white/15 relative group hover:border-white/30 transition-all flex flex-col justify-center items-center text-center">
+            <span className="label-mono text-[7.5px] xs:text-[8.5px] sm:text-[9.5px] text-white/50 block tracking-wider sm:tracking-widest uppercase">
               SQUAD SIZE
             </span>
-            <span className="font-grotesk font-semibold text-base sm:text-lg text-white block mt-1">
+            <span className="font-grotesk font-semibold text-xs xs:text-sm sm:text-lg text-white block mt-0.5 sm:mt-1 whitespace-nowrap">
               2–4 CODERS
             </span>
-            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/30" aria-hidden="true" />
+            <div className="absolute top-0 right-0 w-1.5 h-1.5 sm:w-2 sm:h-2 border-t border-r border-white/30" aria-hidden="true" />
           </div>
         </motion.div>
 
@@ -163,15 +167,15 @@ export default function Hero() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.75, duration: 0.6, ease: EASE }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-5 w-full max-w-md mx-auto"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 w-full max-w-md mx-auto"
         >
-          <RegisterButton label="REGISTER FOR THE HUNT" className="w-full sm:w-auto justify-center py-4 px-8 text-xs tracking-widest" />
+          <RegisterButton label="REGISTER FOR THE HUNT" className="w-full sm:w-auto justify-center py-3.5 sm:py-4 px-8 text-xs tracking-widest" />
           <Button
             variant="outline"
             href="#challenge"
             onClick={scrollTo('challenge')}
             data-hover="true"
-            className="w-full sm:w-auto justify-center py-4 px-7 text-xs tracking-widest"
+            className="w-full sm:w-auto justify-center py-3.5 sm:py-4 px-7 text-xs tracking-widest"
           >
             EXPLORE THE CHALLENGE
           </Button>

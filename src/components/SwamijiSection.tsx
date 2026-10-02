@@ -199,24 +199,24 @@ export default function SwamijiSection() {
         {viewMode === 'spotlight' && (
           <div className="relative">
             {/* Quick Swamiji Selectors (Mobile & Desktop) */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4 mb-8">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mb-6 sm:mb-8">
               {SWAMIJIS.map((s, idx) => {
                 const isSelected = idx === activeIndex;
                 return (
                   <button
                     key={s.id}
                     onClick={() => setActiveIndex(idx)}
-                    className={`group relative text-left p-3 sm:p-4 rounded-[2px] border transition-all duration-300 flex items-center gap-3.5 ${
+                    className={`group relative text-center sm:text-left p-2 sm:p-4 rounded-[2px] border transition-all duration-300 flex flex-col sm:flex-row items-center gap-2 sm:gap-3.5 ${
                       isSelected
-                        ? 'bg-gradient-to-r from-amber-950/30 to-black/60 border-amber-500/50 shadow-[0_0_20px_rgba(245,158,11,0.15)]'
+                        ? 'bg-gradient-to-b sm:bg-gradient-to-r from-amber-950/40 to-black/70 border-amber-500/60 shadow-[0_0_20px_rgba(245,158,11,0.15)]'
                         : 'bg-black/40 border-white/[0.08] hover:border-white/20 hover:bg-black/60'
                     }`}
                   >
                     {/* Small avatar thumbnail */}
                     <div
-                      className={`relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0 border transition-all ${
+                      className={`relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0 border transition-all ${
                         isSelected
-                          ? 'border-amber-400 ring-2 ring-amber-400/30 shadow-[0_0_10px_rgba(245,158,11,0.4)]'
+                          ? 'border-amber-400 ring-2 ring-amber-400/40 shadow-[0_0_12px_rgba(245,158,11,0.4)] scale-105 sm:scale-100'
                           : 'border-white/20 opacity-70 group-hover:opacity-100'
                       }`}
                     >
@@ -227,16 +227,16 @@ export default function SwamijiSection() {
                       />
                     </div>
 
-                    <div className="min-w-0 flex-1">
+                    <div className="min-w-0 flex-1 w-full">
                       <span
-                        className={`label-mono text-[8.5px] block font-semibold tracking-wider uppercase transition-colors ${
+                        className={`label-mono text-[7px] xs:text-[8px] sm:text-[8.5px] block font-semibold tracking-wider uppercase transition-colors truncate ${
                           isSelected ? 'text-amber-400' : 'text-white/40'
                         }`}
                       >
                         {s.role}
                       </span>
                       <h3
-                        className={`font-grotesk font-semibold text-xs sm:text-sm truncate transition-colors ${
+                        className={`font-grotesk font-semibold text-[10.5px] xs:text-xs sm:text-sm truncate transition-colors ${
                           isSelected ? 'text-white' : 'text-white/70 group-hover:text-white'
                         }`}
                       >
@@ -246,7 +246,10 @@ export default function SwamijiSection() {
 
                     {/* Active indicator dot */}
                     {isSelected && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0 animate-ping" />
+                      <span className="hidden sm:block w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0 animate-ping" />
+                    )}
+                    {isSelected && (
+                      <span className="sm:hidden absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-amber-400" />
                     )}
                   </button>
                 );
@@ -261,7 +264,7 @@ export default function SwamijiSection() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -16, scale: 0.98 }}
                 transition={{ duration: 0.45, ease: EASE }}
-                className="relative rounded-[2px] p-6 sm:p-8 md:p-10 overflow-hidden border border-amber-500/30 backdrop-blur-md"
+                className="relative rounded-[2px] p-4 sm:p-8 md:p-10 overflow-hidden border border-amber-500/30 backdrop-blur-md"
                 style={{
                   background:
                     'radial-gradient(ellipse 90% 70% at 30% 40%, rgba(245, 158, 11, 0.08) 0%, rgba(5, 8, 6, 0.95) 75%)',
@@ -287,7 +290,7 @@ export default function SwamijiSection() {
                   
                   {/* Left: Glorious High-Definition Framed Portrait with Halo */}
                   <div className="md:col-span-5 flex flex-col items-center">
-                    <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-[2px] overflow-hidden border border-amber-400/40 shadow-[0_12px_40px_rgba(0,0,0,0.8),0_0_35px_rgba(245,158,11,0.2)] bg-[#070B08] group">
+                    <div className="relative w-full max-w-[240px] xs:max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-[2px] overflow-hidden border border-amber-400/40 shadow-[0_12px_40px_rgba(0,0,0,0.8),0_0_35px_rgba(245,158,11,0.2)] bg-[#070B08] group">
                       
                       {/* Golden Halo Behind Head */}
                       <div
