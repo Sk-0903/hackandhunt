@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens ───────────────────────────────── */
+:root {
+  --bg:           #050806;
+  --surface:      #0A0F0C;
+  --line:         rgba(242,245,243,0.08);
+  --line-strong:  rgba(242,245,243,0.16);
+  --primary:      #00E676;
+  --accent:       #16FF8F;
+  --muted-green:  #63D99D;
+  --text:         #F2F5F3;
+  --text-muted:   #8C9891;
+  --ease:         cubic-bezier(0.22, 1, 0.36, 1);
+  --unit:         8px;
+  --container:    1280px;
+  --section-y:    clamp(4.5rem, 10vw, 9rem);
+}
+
+/* ── Reset ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Show default cursor on touch / coarse pointer */
+@media (hover: none), (pointer: coarse) {
+  body { cursor: auto; }
+}
+
+/* ── Skip link ───────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--unit);
+  z-index: 10000;
+  padding: 8px 16px;
+  background: var(--primary);
+  color: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: var(--unit); outline: none; }
+
+/* ── Selection ───────────────────────────────────── */
+::selection {
+  background: rgba(0,230,118,0.18);
+  color: var(--primary);
+}
+
+/* ── Focus ring ──────────────────────────────────── */
+:focus-visible {
+  outline: 1.5px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(99,217,157,0.2); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,230,118,0.4); }
+
+/* ── Typography helpers ──────────────────────────── */
+.font-grotesk { font-family: 'Space Grotesk', sans-serif; }
+.font-mono    { font-family: 'JetBrains Mono', monospace; }
+
+/* ── Fluid display sizes (clamp) ─────────────────── */
+.text-hero   { font-size: clamp(3.5rem, 12vw, 11rem); }
+.text-section{ font-size: clamp(2.5rem, 7vw, 6rem);   }
+.text-prize  { font-size: clamp(5rem, 16vw, 13rem);   }
+
+/* ── Container ───────────────────────────────────── */
+.container-site {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 4rem);
+}
+
+/* ── Section padding ─────────────────────────────── */
+.section-y { padding-block: var(--section-y); }
+
+/* ── Hairline divider ────────────────────────────── */
+.hairline { height: 1px; background: var(--line); }
+.hairline-strong { height: 1px; background: var(--line-strong); }
+
+/* ── Micro label (mono) ──────────────────────────── */
+.label-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Corner brackets ─────────────────────────────── */
+.bracket {
+  position: relative;
+}
+.bracket::before, .bracket::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(0,230,118,0.35);
+  border-style: solid;
+}
+.bracket::before {
+  top: -4px; left: -4px;
+  border-width: 1px 0 0 1px;
+}
+.bracket::after {
+  bottom: -4px; right: -4px;
+  border-width: 0 1px 1px 0;
+}
+
+/* ── Film grain noise ────────────────────────────── */
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ── Faint coordinate grid ───────────────────────── */
+.coord-grid {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ── Buttons ─────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  padding: 14px 28px;
+  cursor: none;
+  transition: all 200ms var(--ease);
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn:focus-visible { outline: 1.5px solid var(--primary); outline-offset: 3px; }
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--bg);
+  border: 1px solid transparent;
+  font-weight: 500;
+}
+.btn-primary:hover:not([aria-disabled="true"]) {
+  background: var(--accent);
+}
+.btn-primary[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+}
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ── Mobile sticky register bar ─────────────────── */
+.mobile-register-bar {
+  display: none;
+}
+@media (max-width: 767px) {
+  .mobile-register-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 45;
+    padding: 12px 20px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    background: rgba(5,8,6,0.96);
+    border-top: 1px solid var(--line-strong);
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* ── Tabular nums for countdown ──────────────────── */
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* ── Reduced motion ──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .parallax { transform: none !important; }
+}
