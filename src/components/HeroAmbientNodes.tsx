@@ -128,7 +128,7 @@ export default function HeroAmbientNodes() {
       }
 
       // Draw nodes & micro-coordinates
-      ctx.font = '7.5px JetBrains Mono';
+      ctx.font = '7.5px Plus Jakarta Sans';
       for (const n of nodes) {
         const nx = n.x + px * 0.8;
         const ny = n.y + py * 0.8;

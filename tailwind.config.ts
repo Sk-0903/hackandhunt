@@ -19,9 +19,9 @@ const config: Config = {
         'line-strong':'rgba(242,245,243,0.16)',
       },
       fontFamily: {
-        grotesk: ['Space Grotesk', 'sans-serif'],
+        grotesk: ['Outfit', 'Plus Jakarta Sans', 'sans-serif'],
         inter:   ['Inter', 'sans-serif'],
-        mono:    ['JetBrains Mono', 'monospace'],
+        mono:    ['Plus Jakarta Sans', 'sans-serif'],
       },
       borderRadius: {
         DEFAULT: '2px',

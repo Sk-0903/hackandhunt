@@ -51,9 +51,10 @@ body {
   padding: 8px 16px;
   background: var(--primary);
   color: var(--bg);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
   border-radius: 2px;
@@ -81,8 +82,8 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: rgba(0,230,118,0.4); }
 
 /* ── Typography helpers ──────────────────────────── */
-.font-grotesk { font-family: 'Space Grotesk', sans-serif; }
-.font-mono    { font-family: 'JetBrains Mono', monospace; }
+.font-grotesk { font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif; }
+.font-mono    { font-family: 'Plus Jakarta Sans', sans-serif; }
 
 /* ── Fluid display sizes (clamp) ─────────────────── */
 .text-hero   { font-size: clamp(2.5rem, 10.5vw, 10.5rem); }
@@ -104,11 +105,12 @@ body {
 .hairline { height: 1px; background: var(--line); }
 .hairline-strong { height: 1px; background: var(--line-strong); }
 
-/* ── Micro label (mono) ──────────────────────────── */
+/* ── Micro label (sans) ──────────────────────────── */
 .label-mono {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.14em;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
@@ -158,9 +160,10 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   border-radius: 2px;
   padding: 14px 28px;

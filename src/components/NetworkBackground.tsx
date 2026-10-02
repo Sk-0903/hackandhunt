@@ -131,7 +131,7 @@ export default function NetworkBackground({ className = '' }: Props) {
 
       // Label (barely visible)
       if (n.label) {
-        ctx.font = '7px JetBrains Mono';
+        ctx.font = '7px Plus Jakarta Sans';
         ctx.fillStyle = `rgba(140,152,145,0.25)`;
         ctx.fillText(n.label, n.x + 5, n.y - 4);
       }
@@ -140,7 +140,7 @@ export default function NetworkBackground({ className = '' }: Props) {
     // Tooltip for secret nodes
     if (s.tooltip) {
       const { msg, x, y } = s.tooltip;
-      ctx.font = '9px JetBrains Mono';
+      ctx.font = '9px Plus Jakarta Sans';
       const tw = ctx.measureText(msg).width;
       const px = 8, py = 5;
       const tx = Math.min(x + 14, w - tw - px * 2 - 8);

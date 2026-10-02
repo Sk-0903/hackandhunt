@@ -157,7 +157,7 @@ export default function CyberRadarHUD() {
         }
 
         // Target label
-        ctx.font = '8px JetBrains Mono';
+        ctx.font = '8px Plus Jakarta Sans';
         ctx.fillStyle = `rgba(242, 245, 243, ${0.35 + intensity * 0.65})`;
         ctx.fillText(t.label, tx + 7, ty + 3);
       }
