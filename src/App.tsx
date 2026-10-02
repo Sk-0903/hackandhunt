@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import CustomCursor from './components/CustomCursor';
+import CyberFlythrough3D from './components/CyberFlythrough3D';
 import VideoEntrance from './components/VideoEntrance';
 import InstitutionalHeader from './components/InstitutionalHeader';
 import Navbar from './components/Navbar';
@@ -116,6 +117,7 @@ export default function App() {
 
       {/* Persistent overlays */}
       <Noise />
+      <CyberFlythrough3D />
       <CustomCursor />
       <SignalLine />
       {scanKey && <ScanLine visible key={scanKey} />}
