@@ -11,7 +11,6 @@ interface Swamiji {
   role: string;
   institution: string;
   image: string;
-  circleImage: string;
   blessing: string;
   highlight: string;
 }
@@ -25,7 +24,6 @@ const SWAMIJIS: Swamiji[] = [
     role: 'FOUNDER PRESIDENT',
     institution: 'Sri Adichunchanagiri Shikshana Trust®',
     image: '/images/swamiji-1.png',
-    circleImage: '/images/swamiji-1-circle.png',
     blessing:
       'Wisdom rooted in selfless service (Seva) and righteous knowledge is the true foundation of human progress. May this technological confluence illuminate young minds with purpose.',
     highlight: 'Pioneer of Educational Renaissance',
@@ -38,7 +36,6 @@ const SWAMIJIS: Swamiji[] = [
     role: 'PRESIDENT',
     institution: 'Sri Adichunchanagiri Shikshana Trust®',
     image: '/images/swamiji-2.png',
-    circleImage: '/images/swamiji-2-circle.png',
     blessing:
       'Harmonize ancient spiritual values with cutting-edge scientific innovation. Technology must serve humanity with ethics, empathy, and uncompromising excellence.',
     highlight: 'Visionary Patron of Science & Technology',
@@ -51,7 +48,6 @@ const SWAMIJIS: Swamiji[] = [
     role: 'MANAGING DIRECTOR',
     institution: 'SJB & BGS Group of Institutions',
     image: '/images/swamiji-3.png',
-    circleImage: '/images/swamiji-3-circle.png',
     blessing:
       'Nurturing youth to think fearlessly, build with passion, and lead with character. May the participants of Hack & Hunt unlock transformative breakthroughs.',
     highlight: 'Architect of Technical & Academic Excellence',
@@ -225,7 +221,7 @@ export default function SwamijiSection() {
                       }`}
                     >
                       <img
-                        src={s.circleImage || s.image}
+                        src={s.image}
                         alt={s.shortName}
                         className="w-full h-full object-cover object-top"
                       />
