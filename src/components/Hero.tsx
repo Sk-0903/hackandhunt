@@ -4,7 +4,6 @@ import NetworkBackground from './NetworkBackground';
 import { RegisterButton } from './ui/Button';
 import Button from './ui/Button';
 import { RevealLine } from './ui/Reveal';
-import HeroAmbientNodes from './HeroAmbientNodes';
 import { EVENT_CONFIG } from '../data/eventConfig';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -12,7 +11,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '16%']);
   const opacity  = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
 
   const scrollTo = (id: string) => (e: React.MouseEvent) => {
@@ -24,187 +23,197 @@ export default function Hero() {
     <section
       id="home"
       ref={ref}
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-[92vh] lg:min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20"
       aria-label="Hero"
+      style={{
+        background: 'linear-gradient(180deg, #050806 0%, #080D0A 50%, #050806 100%)',
+      }}
     >
-      {/* Network canvas */}
+      {/* Interactive Network Particle Canvas */}
       <NetworkBackground className="opacity-60" />
 
-      {/* Radial green glow — hero only, max 8% */}
+      {/* Radiant Central Emerald Glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 70% 55% at 50% 45%, rgba(0,230,118,0.06) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 80% 60% at 50% 48%, rgba(0, 230, 118, 0.08) 0%, rgba(0, 230, 118, 0.015) 50%, transparent 75%)',
         }}
         aria-hidden="true"
       />
 
-      {/* Bottom fade into next section */}
+      {/* Subtle bottom fade into next section */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-56 pointer-events-none z-[2]"
-        style={{ background: 'linear-gradient(to bottom, transparent, var(--bg))' }}
+        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-[2]"
+        style={{ background: 'linear-gradient(to bottom, transparent, #050806)' }}
         aria-hidden="true"
       />
 
+      {/* Corner HUD accent brackets */}
+      <div className="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-primary/40 pointer-events-none hidden md:block" aria-hidden="true" />
+      <div className="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-primary/40 pointer-events-none hidden md:block" aria-hidden="true" />
+      <div className="absolute bottom-6 left-6 w-4 h-4 border-b-2 border-l-2 border-primary/40 pointer-events-none hidden md:block" aria-hidden="true" />
+      <div className="absolute bottom-6 right-6 w-4 h-4 border-b-2 border-r-2 border-primary/40 pointer-events-none hidden md:block" aria-hidden="true" />
+
       <motion.div
         style={{ y: contentY, opacity }}
-        className="relative z-10 container-site pt-12 md:pt-16 pb-16 w-full"
+        className="relative z-10 container-site w-full flex flex-col items-center text-center max-w-5xl mx-auto"
       >
-        {/* Top neat telemetry coordinate strip — covers space neatly */}
+        {/* Dignified Institutional & Fest Header Badge */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.05 }}
-          className="mb-5 pb-3 flex flex-wrap items-center gap-x-6 gap-y-1.5"
-          style={{ borderBottom: '1px solid rgba(242, 245, 243, 0.06)' }}
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="mb-5 sm:mb-6 inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/[0.04] backdrop-blur-md"
         >
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="label-mono text-[9.5px] tracking-[0.2em] text-primary/80">
-              SYS.ACTIVE // SECTOR 07
-            </span>
-          </div>
-          <span className="hidden sm:inline text-white/20">|</span>
-          <span className="label-mono text-[9px] tracking-[0.16em] opacity-45">
-            BANGALORE · 12.9716° N, 77.5946° E
+          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+          <span className="label-mono font-semibold text-[10px] sm:text-[11px] text-white/90 tracking-widest uppercase">
+            {EVENT_CONFIG.college}
           </span>
-          <span className="hidden sm:inline text-white/20">|</span>
-          <span className="label-mono text-[9px] tracking-[0.16em] text-white/60">
-            FLAGSHIP TECHNICAL CHALLENGE
+          <span className="text-primary/60">·</span>
+          <span className="label-mono font-semibold text-[10px] sm:text-[11px] text-primary tracking-widest uppercase">
+            {EVENT_CONFIG.techFest} • SILVER JUBILEE '26
           </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
         </motion.div>
 
-        {/* College + fest + Subtle Ambient Animation in freed space */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-6 md:mb-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
-        >
-          <div className="space-y-1.5">
-            <span className="label-mono block" style={{ letterSpacing: '0.16em' }}>
-              {EVENT_CONFIG.college}
-            </span>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-px" style={{ background: 'var(--line-strong)' }} />
-              <span className="label-mono font-semibold" style={{ color: 'var(--primary)', opacity: 0.9 }}>
-                {EVENT_CONFIG.techFest} · SILVER JUBILEE EDITION
+        {/* Full-Width Centered Monumental Title: HACK & HUNT */}
+        <div className="w-full my-3 sm:my-4">
+          <h1
+            aria-label="Hack and Hunt"
+            className="font-grotesk font-black tracking-tight leading-[0.95] text-center"
+            style={{ letterSpacing: '-0.035em' }}
+          >
+            <RevealLine delay={0.1}>
+              <span className="inline-block text-hero text-white mr-2 sm:mr-4">
+                HACK
               </span>
-            </div>
-          </div>
-
-          {/* Ambient subtle nodes animation in freed space */}
-          <div className="hidden sm:block">
-            <HeroAmbientNodes />
-          </div>
-        </motion.div>
-
-        {/* Main title — immediate dynamic entrance animation */}
-        <h1 aria-label="Hack and Hunt" className="font-grotesk font-bold leading-none tracking-tight mb-6 md:mb-8"
-          style={{ letterSpacing: '-0.03em' }}>
-          <RevealLine delay={0.08}>
-            <span className="block text-hero" style={{ color: 'var(--text)' }}>HACK</span>
-          </RevealLine>
-          <RevealLine delay={0.22}>
-            <span
-              className="block text-hero"
-              style={{
-                color: 'var(--primary)',
-                textShadow: '0 0 40px rgba(0, 230, 118, 0.25)',
-              }}
-            >
-              &amp; HUNT
-            </span>
-          </RevealLine>
-        </h1>
-
-        {/* Tagline */}
-        <div className="mb-8 md:mb-9 space-y-1 max-w-xs md:max-w-sm">
-          {EVENT_CONFIG.tagline.map((line, i) => (
-            <motion.p
-              key={line}
-              initial={{ opacity: 0, x: -12 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.55 + i * 0.1, duration: 0.6, ease: EASE }}
-              className="label-mono"
-              style={{ fontSize: '0.75rem', color: 'var(--text-muted)', letterSpacing: '0.1em' }}
-            >
-              {line}
-            </motion.p>
-          ))}
+              <span
+                className="inline-block text-hero"
+                style={{
+                  color: '#00E676',
+                  textShadow: '0 0 45px rgba(0, 230, 118, 0.45), 0 0 90px rgba(0, 230, 118, 0.2)',
+                }}
+              >
+                &amp; HUNT
+              </span>
+            </RevealLine>
+          </h1>
         </div>
 
-        {/* Meta row */}
+        {/* Tagline & Event Mission Brief */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.85, duration: 0.6, ease: EASE }}
-          className="flex flex-wrap gap-x-8 gap-y-3 mb-8 md:mb-9"
-          style={{ borderTop: '1px solid var(--line)', paddingTop: '1.25rem' }}
+          transition={{ delay: 0.35, duration: 0.6, ease: EASE }}
+          className="mt-4 sm:mt-5 mb-8 sm:mb-10 max-w-2xl mx-auto space-y-2"
         >
-          <div>
-            <p className="label-mono mb-0.5" style={{ opacity: 0.4 }}>DATE</p>
-            <p className="label-mono" style={{ color: 'var(--text)', fontSize: '0.75rem' }}>
-              {EVENT_CONFIG.date}
-            </p>
+          <p className="label-mono font-semibold text-primary/90 text-xs sm:text-sm tracking-[0.25em] uppercase">
+            OUTTHINK. OUTBUILD. OUTHUNT.
+          </p>
+          <p className="font-inter text-sm sm:text-base md:text-lg text-white/70 leading-relaxed max-w-xl mx-auto">
+            The flagship dual-phase technical challenge of VIGYANTRA 2026. A high-stakes combination
+            of rapid code-cracking sprints and real-world campus treasure hunting.
+          </p>
+        </motion.div>
+
+        {/* Centered Key Metric Cards Strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.55, duration: 0.6, ease: EASE }}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5 w-full max-w-2xl mb-9 sm:mb-11"
+        >
+          {/* Card 1: Prize Pool */}
+          <div className="p-4 rounded-[2px] bg-black/60 border border-primary/35 relative group hover:border-primary/70 transition-all shadow-[0_4px_20px_rgba(0,230,118,0.08)]">
+            <span className="label-mono text-[9px] text-white/45 block tracking-widest uppercase">
+              PRIZE POOL
+            </span>
+            <span className="font-grotesk font-bold text-xl sm:text-2xl text-primary block mt-1">
+              ₹50,000
+            </span>
+            <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-primary/70" aria-hidden="true" />
+            <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-primary/70" aria-hidden="true" />
           </div>
-          <div style={{ borderLeft: '1px solid var(--line)', paddingLeft: '2rem' }}>
-            <p className="label-mono mb-0.5" style={{ opacity: 0.4 }}>PRIZE POOL</p>
-            <p className="label-mono" style={{ color: 'var(--primary)', fontSize: '0.75rem' }}>
-              {EVENT_CONFIG.prizePool}
-            </p>
+
+          {/* Card 2: Date */}
+          <div className="p-4 rounded-[2px] bg-black/60 border border-white/15 relative group hover:border-white/30 transition-all">
+            <span className="label-mono text-[9px] text-white/45 block tracking-widest uppercase">
+              EVENT DATE
+            </span>
+            <span className="font-grotesk font-semibold text-base sm:text-lg text-white block mt-1">
+              30 OCT 2026
+            </span>
+            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/30" aria-hidden="true" />
+          </div>
+
+          {/* Card 3: Team */}
+          <div className="p-4 rounded-[2px] bg-black/60 border border-white/15 relative group hover:border-white/30 transition-all">
+            <span className="label-mono text-[9px] text-white/45 block tracking-widest uppercase">
+              SQUAD SIZE
+            </span>
+            <span className="font-grotesk font-semibold text-base sm:text-lg text-white block mt-1">
+              2–4 CODERS
+            </span>
+            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/30" aria-hidden="true" />
           </div>
         </motion.div>
 
-        {/* CTAs */}
+        {/* Action Hub CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.6, ease: EASE }}
-          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 max-w-md sm:max-w-none"
+          transition={{ delay: 0.75, duration: 0.6, ease: EASE }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-5 w-full max-w-md mx-auto"
         >
-          <RegisterButton label="REGISTER NOW" className="justify-center py-3.5 sm:py-3" />
+          <RegisterButton label="REGISTER FOR THE HUNT" className="w-full sm:w-auto justify-center py-4 px-8 text-xs tracking-widest" />
           <Button
             variant="outline"
             href="#challenge"
             onClick={scrollTo('challenge')}
             data-hover="true"
-            className="justify-center py-3.5 sm:py-3"
+            className="w-full sm:w-auto justify-center py-4 px-7 text-xs tracking-widest"
           >
             EXPLORE THE CHALLENGE
           </Button>
         </motion.div>
 
-        {/* Coordinate label */}
+        {/* Sacred Invocation Link */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.3, duration: 0.8 }}
-          className="mt-16 flex items-center gap-3"
+          transition={{ delay: 0.95 }}
+          className="mt-7 flex items-center justify-center"
         >
-          <div className="w-12 h-px" style={{ background: 'var(--line)' }} />
-          <span className="label-mono opacity-25">12.9716° N · 77.5946° E · SECTOR 07</span>
+          <a
+            href="#heritage"
+            onClick={scrollTo('heritage')}
+            className="label-mono text-[10px] text-amber-400/80 hover:text-amber-300 transition-colors flex items-center gap-2 group"
+          >
+            <span className="font-sans font-medium text-amber-300">|| ಜೈ ಶ್ರೀ ಗುರುದೇವ್ ||</span>
+            <span className="tracking-wider">VIEW DIVINE BLESSINGS</span>
+            <span className="group-hover:translate-y-0.5 transition-transform">↓</span>
+          </a>
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Subtle Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+        transition={{ delay: 1.3 }}
+        className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 pointer-events-none"
         aria-hidden="true"
       >
-        <span className="label-mono opacity-30" style={{ fontSize: '0.55rem' }}>SCROLL</span>
-        <div className="w-px h-8 overflow-hidden" style={{ background: 'var(--line)' }}>
+        <span className="label-mono text-[7.5px] text-white/30 tracking-widest">SCROLL</span>
+        <div className="w-px h-6 overflow-hidden bg-white/10">
           <motion.div
             animate={{ y: ['-100%', '200%'] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
-            className="w-full h-1/2"
-            style={{ background: 'var(--primary)', opacity: 0.6 }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+            className="w-full h-1/2 bg-primary"
           />
         </div>
       </motion.div>
     </section>
   );
 }
+
