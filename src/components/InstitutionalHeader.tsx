@@ -45,13 +45,13 @@ export default function InstitutionalHeader({ scrolled = false }: InstitutionalH
               {/* Sacred Invocation + Trust (Inline on scroll / stacked when open) */}
               <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
                 <span
-                  className="label-mono font-medium tracking-[0.2em] select-none transition-all duration-300"
+                  className="font-medium tracking-[0.16em] select-none transition-all duration-300 font-sans"
                   style={{
-                    color: '#8C9891',
-                    fontSize: scrolled ? '9px' : '10.5px',
+                    color: '#FFB020',
+                    fontSize: scrolled ? '9.5px' : '11px',
                   }}
                 >
-                  || JAI SRI GURUDEV ||
+                  || ಜೈ ಶ್ರೀ ಗುರುದೇವ್ || JAI SRI GURUDEV
                 </span>
                 {!scrolled && (
                   <>

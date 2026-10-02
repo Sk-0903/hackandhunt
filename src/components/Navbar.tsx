@@ -151,19 +151,41 @@ export default function Navbar({ scrolled: externalScrolled }: NavbarProps) {
         {menuOpen && (
           <motion.div
             key="menu"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-0 z-40 flex flex-col"
-            style={{ background: 'rgba(5,8,6,0.97)', backdropFilter: 'blur(16px)' }}
+            className="fixed inset-0 z-[70] flex flex-col overflow-y-auto"
+            style={{ background: 'rgba(5,8,6,0.98)', backdropFilter: 'blur(20px)' }}
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
           >
             <div className="absolute inset-0 coord-grid opacity-20 pointer-events-none" />
 
-            <div className="container-site relative z-10 flex flex-col gap-8 mt-28">
+            {/* Mobile menu header */}
+            <div className="container-site flex items-center justify-between py-5 border-b border-white/[0.08] relative z-10">
+              <div className="flex items-center gap-2">
+                <img
+                  src="/images/vigyantra-logo.png"
+                  alt="Vigyantra Logo"
+                  className="h-7 w-auto object-contain"
+                />
+                <span className="font-grotesk font-bold text-sm text-text">
+                  VIGYANTRA <span style={{ color: 'var(--primary)' }}>'26</span>
+                </span>
+              </div>
+              <button
+                onClick={close}
+                className="p-2.5 rounded-[2px] border border-white/15 text-white/70 hover:text-white label-mono text-xs flex items-center gap-1.5"
+                aria-label="Close menu"
+              >
+                <span>CLOSE</span>
+                <span className="text-sm font-bold">✕</span>
+              </button>
+            </div>
+
+            <div className="container-site relative z-10 flex flex-col gap-6 py-8">
               {NAV_LINKS.map((link, i) => (
                 <motion.a
                   key={link.href}
@@ -171,32 +193,34 @@ export default function Navbar({ scrolled: externalScrolled }: NavbarProps) {
                   onClick={close}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.055, duration: 0.4 }}
-                  className="font-grotesk font-semibold flex items-baseline gap-4"
+                  transition={{ delay: i * 0.045, duration: 0.3 }}
+                  className="font-grotesk font-semibold flex items-baseline justify-between py-2 border-b border-white/[0.04]"
                   style={{
-                    fontSize: 'clamp(1.75rem, 6vw, 2.5rem)',
+                    fontSize: 'clamp(1.5rem, 5.5vw, 2.25rem)',
                     color: 'var(--text)',
                     textDecoration: 'none',
                   }}
                   data-hover="true"
                 >
-                  {link.label}
-                  <span className="label-mono opacity-30">0{i + 1}</span>
+                  <span>{link.label}</span>
+                  <span className="label-mono text-xs opacity-35">0{i + 1}</span>
                 </motion.a>
               ))}
 
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.38 }}
-                className="mt-4"
+                transition={{ delay: 0.35 }}
+                className="mt-4 pt-4"
               >
-                <RegisterButton label="REGISTER NOW" className="w-full justify-center" />
+                <RegisterButton label="REGISTER NOW" className="w-full justify-center py-3.5" />
               </motion.div>
             </div>
 
-            <div className="container-site relative z-10 mt-auto mb-10">
-              <span className="label-mono opacity-30">30 OCTOBER 2026 / SJBIT</span>
+            <div className="container-site relative z-10 mt-auto py-6 border-t border-white/[0.06]">
+              <span className="label-mono text-[9.5px] opacity-35 block text-center">
+                SJB INSTITUTE OF TECHNOLOGY · 30 OCTOBER 2026
+              </span>
             </div>
           </motion.div>
         )}

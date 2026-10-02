@@ -42,8 +42,8 @@ function Unit({ value, label, delay, inView }: {
       <div
         className="relative flex items-center justify-center overflow-hidden bracket"
         style={{
-          width: 'clamp(72px, 14vw, 130px)',
-          height: 'clamp(80px, 15vw, 140px)',
+          width: 'clamp(56px, 16vw, 120px)',
+          height: 'clamp(66px, 18vw, 130px)',
           background: 'var(--surface)',
           border: '1px solid var(--line-strong)',
         }}
@@ -56,7 +56,7 @@ function Unit({ value, label, delay, inView }: {
         />
         <Digit value={value} />
       </div>
-      <span className="label-mono mt-3" style={{ opacity: 0.45 }}>{label}</span>
+      <span className="label-mono text-[9px] sm:text-[10px] mt-2.5 sm:mt-3" style={{ opacity: 0.55 }}>{label}</span>
     </motion.div>
   );
 }
@@ -67,8 +67,8 @@ function Sep({ inView, delay }: { inView: boolean; delay: number }) {
       initial={{ opacity: 0 }}
       animate={inView ? { opacity: 1 } : {}}
       transition={{ delay }}
-      className="font-mono pb-10 self-end"
-      style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)', color: 'var(--line-strong)' }}
+      className="font-mono pb-8 sm:pb-10 self-end select-none"
+      style={{ fontSize: 'clamp(1.1rem, 3.5vw, 2.5rem)', color: 'var(--line-strong)' }}
       aria-hidden="true"
     >
       :
@@ -112,7 +112,7 @@ export default function Countdown() {
             SYSTEM ACTIVE / 30.10.2026 / SJBIT
           </motion.p>
         ) : (
-          <div className="flex flex-wrap items-end gap-3 md:gap-4" role="timer" aria-live="off">
+          <div className="flex items-end justify-center sm:justify-start gap-1.5 sm:gap-3 md:gap-4 overflow-x-auto max-w-full py-2" role="timer" aria-live="off">
             <Unit value={days}    label="DAYS"    delay={0.1} inView={inView} />
             <Sep inView={inView} delay={0.15} />
             <Unit value={hours}   label="HOURS"   delay={0.2} inView={inView} />

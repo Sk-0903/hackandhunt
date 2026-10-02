@@ -3,7 +3,7 @@ import { EVENT_CONFIG } from '../data/eventConfig';
 export default function Footer() {
   return (
     <footer
-      className="relative py-16 overflow-hidden"
+      className="relative pt-16 pb-28 md:pb-16 overflow-hidden"
       style={{ borderTop: '1px solid var(--line)' }}
     >
       {/* Large faded wordmark */}

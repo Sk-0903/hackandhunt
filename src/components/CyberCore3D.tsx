@@ -77,7 +77,7 @@ export default function CyberCore3D() {
     const ro = new ResizeObserver(resize);
     ro.observe(container);
 
-    // Mouse tilt interaction
+    // Mouse & Touch tilt interaction
     const onMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
@@ -86,7 +86,18 @@ export default function CyberCore3D() {
       targetAngleX = -y * 2.2;
     };
 
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 0) return;
+      const touch = e.touches[0];
+      const rect = container.getBoundingClientRect();
+      const x = (touch.clientX - rect.left) / rect.width - 0.5;
+      const y = (touch.clientY - rect.top) / rect.height - 0.5;
+      targetAngleY = x * 2.5;
+      targetAngleX = -y * 2.5;
+    };
+
     window.addEventListener('mousemove', onMouseMove, { passive: true });
+    container.addEventListener('touchmove', onTouchMove, { passive: true });
 
     // IntersectionObserver to pause when off-screen
     const io = new IntersectionObserver(([entry]) => {
@@ -280,6 +291,7 @@ export default function CyberCore3D() {
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('mousemove', onMouseMove);
+      container.removeEventListener('touchmove', onTouchMove);
       ro.disconnect();
       io.disconnect();
     };

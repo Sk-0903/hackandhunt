@@ -92,7 +92,7 @@ export default function RegistrationCTA() {
             >
               <RegisterButton
                 label="REGISTER FOR HACK & HUNT"
-                className="text-[0.7rem] px-8 py-4"
+                className="text-[0.7rem] px-6 sm:px-8 py-4 w-full sm:w-auto justify-center"
               />
 
               {/* Status line — auto-updates from config */}

@@ -161,14 +161,15 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.6, ease: EASE }}
-          className="flex flex-wrap gap-4"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 max-w-md sm:max-w-none"
         >
-          <RegisterButton label="REGISTER NOW" />
+          <RegisterButton label="REGISTER NOW" className="justify-center py-3.5 sm:py-3" />
           <Button
             variant="outline"
             href="#challenge"
             onClick={scrollTo('challenge')}
             data-hover="true"
+            className="justify-center py-3.5 sm:py-3"
           >
             EXPLORE THE CHALLENGE
           </Button>

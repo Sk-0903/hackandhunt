@@ -28,39 +28,44 @@ function Checkpoint({ item, index, pathProgress }: CheckpointProps) {
   return (
     <div
       ref={ref}
-      className={`relative grid grid-cols-[1fr_40px_1fr] md:grid-cols-[1fr_56px_1fr] items-center gap-4`}
+      className="relative grid grid-cols-[36px_1fr] md:grid-cols-[1fr_56px_1fr] items-center gap-3 md:gap-4 my-2 md:my-0"
       style={{ minHeight: '90px' }}
     >
-      {/* Left content */}
+      {/* Left content (desktop only for even index, hidden on mobile) */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={inView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.6, delay: index * 0.08, ease: EASE }}
-        className={`${isLeft ? '' : 'opacity-0 pointer-events-none'}`}
+        className={`hidden md:block ${isLeft ? '' : 'opacity-0 pointer-events-none'}`}
         aria-hidden={!isLeft}
       >
         {isLeft && <CheckpointContent item={item} />}
       </motion.div>
 
-      {/* Center: node */}
+      {/* Node indicator */}
       <div className="flex flex-col items-center justify-center self-stretch">
         <motion.div
           style={{ backgroundColor: dotColor, borderColor: dotColor }}
-          className="w-3 h-3 md:w-4 md:h-4 rounded-full border flex-shrink-0"
+          className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full border flex-shrink-0"
           animate={inView ? { scale: [0, 1.2, 1] } : {}}
           transition={{ duration: 0.4, delay: index * 0.1 + 0.2, ease: 'backOut' }}
         />
       </div>
 
-      {/* Right content */}
+      {/* Right content: Shown on mobile for ALL indexes; on desktop only for odd indexes */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={inView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.6, delay: index * 0.08, ease: EASE }}
-        className={`${!isLeft ? '' : 'opacity-0 pointer-events-none'}`}
-        aria-hidden={isLeft}
+        className={`block md:${!isLeft ? 'block' : 'opacity-0 pointer-events-none'}`}
+        aria-hidden={false}
       >
-        {!isLeft && <CheckpointContent item={item} />}
+        <div className="md:hidden">
+          <CheckpointContent item={item} />
+        </div>
+        <div className="hidden md:block">
+          {!isLeft && <CheckpointContent item={item} />}
+        </div>
       </motion.div>
     </div>
   );
@@ -135,11 +140,10 @@ export default function ChallengeJourney() {
 
         {/* Journey layout with SVG center line */}
         <div className="relative">
-          {/* SVG path — centered vertical line */}
+          {/* SVG path — left aligned on mobile, centered on desktop */}
           <div
-            className="absolute inset-x-0 top-0"
+            className="absolute top-0 left-[17.5px] md:left-[calc(50%-0.5px)]"
             style={{
-              left: 'calc(50% - 0.5px)',
               width: '1px',
               height: `${SVG_H}px`,
               pointerEvents: 'none',
