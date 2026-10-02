@@ -4,12 +4,12 @@ import SectionLabel from './ui/SectionLabel';
 import { EVENT_CONFIG } from '../data/eventConfig';
 
 const ROWS = [
-  { label: 'EVENT',        value: EVENT_CONFIG.eventName,   green: false, big: false },
-  { label: 'DATE',         value: EVENT_CONFIG.date,        green: false, big: false },
-  { label: 'VENUE',        value: EVENT_CONFIG.venue,       green: false, big: false },
-  { label: 'EVENT TYPE',   value: EVENT_CONFIG.eventType,   green: false, big: false },
-  { label: 'PRIZE POOL',   value: EVENT_CONFIG.prizePool,   green: true,  big: true  },
-  { label: 'REGISTRATION', value: 'Opening Soon',           green: false, big: false },
+  { label: 'EVENT',        value: EVENT_CONFIG.eventName,   green: false },
+  { label: 'DATE',         value: EVENT_CONFIG.date,        green: false },
+  { label: 'VENUE',        value: EVENT_CONFIG.venue,       green: false },
+  { label: 'EVENT TYPE',   value: EVENT_CONFIG.eventType,   green: false },
+  { label: 'PRIZE POOL',   value: EVENT_CONFIG.prizePool,   green: true  },
+  { label: 'REGISTRATION', value: 'Opening Soon',           green: false },
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -69,11 +69,11 @@ export default function EventDetails() {
               />
 
               <div
-                className="flex flex-col sm:flex-row sm:items-center justify-between py-5 gap-2 sm:gap-8"
+                className="flex flex-col sm:flex-row sm:items-center justify-between py-4 sm:py-5 gap-1 sm:gap-8"
                 role="cell"
               >
                 <span
-                  className="label-mono flex-shrink-0"
+                  className="label-mono flex-shrink-0 text-white/50 text-[9px] sm:text-[10.5px]"
                   style={{ minWidth: '140px' }}
                   role="rowheader"
                 >
@@ -81,10 +81,12 @@ export default function EventDetails() {
                 </span>
 
                 <span
-                  className="font-grotesk font-semibold flex-1 leading-none"
+                  className={`font-grotesk font-semibold flex-1 leading-none ${
+                    row.green
+                      ? 'text-primary text-base sm:text-xl font-bold'
+                      : 'text-white text-sm sm:text-base md:text-lg'
+                  }`}
                   style={{
-                    fontSize: row.big ? 'clamp(2.5rem, 6vw, 5rem)' : 'clamp(1rem, 2.5vw, 1.5rem)',
-                    color: row.green ? 'var(--primary)' : 'var(--text)',
                     letterSpacing: '-0.02em',
                   }}
                 >

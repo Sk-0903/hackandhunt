@@ -128,7 +128,7 @@ export default function App() {
           <Navbar scrolled={headerScrolled} />
         </div>
 
-        <main id="main" tabIndex={-1}>
+        <main id="main" tabIndex={-1} className="pb-20 md:pb-0">
           <Hero />
           <SwamijiSection />
           <About />

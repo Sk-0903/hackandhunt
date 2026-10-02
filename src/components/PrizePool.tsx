@@ -73,7 +73,7 @@ export default function PrizePool() {
           <SectionLabel index="05" label="PRIZE POOL" coord="HIGH VALUE TARGET" />
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-12">
+        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 sm:gap-12">
           {/* Number */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -106,18 +106,17 @@ export default function PrizePool() {
           </motion.div>
 
           {/* Word-by-word slogan reveal */}
-          <div className="flex flex-col gap-2 lg:text-right">
+          <div className="flex flex-row flex-wrap sm:flex-col gap-2.5 sm:gap-2 lg:text-right mt-2 sm:mt-0">
             {WORDS.map((word, i) => (
               <motion.p
                 key={word}
                 initial={{ opacity: 0, x: 20 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.35 + i * 0.14, ease: EASE }}
-                className="font-grotesk font-semibold leading-none"
+                className="font-grotesk font-bold leading-none text-base xs:text-lg sm:text-2xl lg:text-[3.25rem]"
                 style={{
-                  fontSize: 'clamp(1.5rem, 4vw, 3.25rem)',
                   letterSpacing: '-0.02em',
-                  color: `rgba(242,245,243,${1 - i * 0.3})`,
+                  color: `rgba(242,245,243,${1 - i * 0.25})`,
                 }}
               >
                 {word}
